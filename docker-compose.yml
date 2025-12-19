@@ -9,8 +9,8 @@ services:
     container_name: wallet-postgres
     environment:
       POSTGRES_DB: wallet_db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: ${DOCKER_DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DOCKER_DATABASE_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
@@ -28,9 +28,9 @@ services:
       postgres:
         condition: service_healthy
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/wallet_db
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_DATASOURCE_URL: ${DOCKER_DATABASE_URL}
+      SPRING_DATASOURCE_USERNAME: ${DOCKER_DATABASE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${DOCKER_DATABASE_PASSWORD}
     ports:
       - "8080:8081"
     restart: unless-stopped
